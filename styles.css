@@ -1,0 +1,72 @@
+body {
+    position: relative;
+}
+.tribute-demo-input {
+    outline: none;
+    border: 1px solid #eee;
+    padding: 3px 5px;
+    border-radius: 2px;
+    font-size: 15px;
+    min-height: 32px;
+    cursor: text;
+}
+.tribute-demo-input:focus {
+    border-color: #d1d1d1;
+    background-color: #fbfbfb;
+}
+[contenteditable="true"]:empty:before {
+    content: attr(placeholder);
+    display: block;
+    color: #ccc;
+}
+#test-autocomplete-container {
+    position: relative;
+}
+#test-autocomplete-textarea-container {
+    position: relative;
+}
+.float-right {
+    float: right;
+}
+
+.heading {
+    text-align: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+    font-style: normal;
+    font-size: 30px;
+}
+
+.input-area {
+    height: 90px;
+    font-weight: 80%;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(220, 223, 223);
+    padding: 15px;
+}
+
+.input-area:focus {
+    border:none;
+}
+
+.output-area {
+    height: 50px;
+    font-weight: 80%;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(220, 223, 223);
+    padding: 15px;
+}
+
+.btn-div {
+    text-align: center;
+}
+
+.btn-class {
+    background-color: rgb(158, 158, 230);
+    border: none;
+    border-radius: 7px;
+}
