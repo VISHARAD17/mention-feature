@@ -1,1 +1,1 @@
-### this mention feature is made using [tribute.js]()
+### Mention feature is made using [tribute.js]()
