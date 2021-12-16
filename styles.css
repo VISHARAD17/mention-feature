@@ -1,6 +1,11 @@
 body {
     position: relative;
 }
+
+p-class {
+    visibility: hidden;
+}
+
 .tribute-demo-input {
     outline: none;
     border: 1px solid #eee;

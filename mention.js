@@ -18,12 +18,6 @@ var data = [
         email: "chinmay@gmail.com",
         id:'3'
     },
-    {
-        key: "visharad borsutkar",
-        value: "visharad borsutkar",
-        email: "visharadihihh@gmail.com",
-        id:'4'
-    },
 ];
 
 // ------- name and id data from the main dummy data
@@ -41,7 +35,7 @@ selectTemplate: function(item) {
     return (
         '<span contenteditable="false">&nbsp<a href="http://google.com" target="_blank" title="' +
         item.original.email +
-        '">' +
+        '">@' +
         item.original.value +
         "</a>&nbsp</span>"
         // '<a href="' + item.original.email +'">' + item.original.value+'</a>'
@@ -51,11 +45,13 @@ selectTemplate: function(item) {
     return "@" + item.original.value;
 },
 requireLeadingSpace: false,
-allowSpaces: true
+allowSpaces: false,
+menuItemLimit: 10,
+spaceSelectsMatch: true,
 });
 tribute.attach(document.getElementById("test"));
-tribute.attach(document.getElementById("testInput"));
-tribute.attach(document.getElementById("testarea"));
+// tribute.attach(document.getElementById("testInput"));
+// tribute.attach(document.getElementById("testarea"));
 
 // logic for getting edited msgs
 function getIndex(str) {
@@ -72,46 +68,104 @@ function getIndexID(str) {
     return -1;
 }
 
+function countMentions(str){
+    var ans = 0;
+    for(var i=0; i<str.length; i++){
+        if(str[i] == "@") ans += 1;
+    }
+    return ans;
+}
 function myFunction() {
-    var text = document.getElementById('test').innerText;
-    var textArray = text.split(/(\s+)/);
+    var textArray = document.getElementById('test').innerText.split(/(\s+)/);
     var wordArray = [];
-    console.log(textArray);
     for(var i=0; i<textArray.length; i++){
-        if(textArray[i][0] != " " && textArray[i].length > 0){
+        if(/\s/g.test(textArray[i]) == false && textArray[i].length > 0){
             wordArray.push(textArray[i]);
         }
     }
-    // replacing mentions with ids
-    modText = "";
-    for(i=0; i<wordArray.length; i++){
-        var index = getIndex(wordArray[i]);
-        if(index != -1){
-            modText += "#@" + data[index].id;
+    console.log(wordArray);
+    var text = "";
+    for(var i=0; i<wordArray.length; i++){
+        if(wordArray.length > 1 && wordArray[i][0] === "@" && wordArray[i][1] != "@"){
+            //it is a mention
+            var word = wordArray[i];
+            word = word.slice(1);  //removes first @ char
+            console.log(word);
+            index = getIndex(word);
+            console.log(index);
+            if(index != -1)text += "#@"+ data[index].id + " ";
+            else{
+                text += "@" + word + " ";
+            }
         }
         else{
-            modText += wordArray[i] + " ";
+            text += wordArray[i] + " ";
         }
     }
-    console.log(modText);
-    document.getElementById('output-text-1').innerHTML = modText;
+    console.log(text);
+    document.getElementById('output-text-1').innerHTML = text;
+    // console.log(textArray);
+    // for(var i=0; i<textArray.length; i++){
+    //     if(textArray[i][0] != " " && textArray[i].length > 0){
+    //         wordArray.push(textArray[i]);
+    //     }
+    // }
+    // // replacing mentions with ids
+    // modText = "";
+    // for(i=0; i<wordArray.length; i++){
+    //     var index = getIndex(wordArray[i]);
+    //     if(index != -1){
+    //         modText += "#@" + data[index].id;
+    //     }
+    //     else{
+    //         modText += wordArray[i] + " ";
+    //     }
+    // }
+    // console.log(modText);
+    // document.getElementById('output-text-1').innerHTML = modText;
     
     // getting original msg from the converted msg
     var orginalText = " ";
-    modTextArray = modText.split(/(\s+)/);
-    console.log(modTextArray);
-    for(i=0; i<modTextArray.length; i++){
-        if(modTextArray[i][0] != " " && modTextArray[i].length > 0){
-            if(modTextArray[i][0] === "#" && modTextArray[i][1] === "@"){
-                var index = getIndexID(modTextArray[i].substring(2, modTextArray[i].length));
-                if(index != -1){
-                    orginalText += data[index].value + " ";
-                }
-            }
-            else{
-                orginalText += modTextArray[i] + " ";
-            }
+    modText = text.split(/(\s+)/);
+    console.log(modText);
+    modTextArray = [];
+
+    for(var i=0; i<modText.length; i++){
+        if(/\s/g.test(modText[i]) == false && modText[i].length > 0){
+            modTextArray.push(modText[i]);
         }
     }
+    // console.log(modTextArray);
+
+    for(var i=0; i<modTextArray.length; i++){
+        if(modTextArray[i].length > 2 && modTextArray[i][0] == "#" && modTextArray[i][1] == "@"){
+            modTextArray[i] = modTextArray[i].slice(1);
+            modTextArray[i] = modTextArray[i].slice(1);
+            var index = getIndexID(modTextArray[i]);
+            if(index != -1) orginalText += data[index].value + " ";
+            else{
+                orginalText += "#" + "@" + modTextArray[i];
+            }
+        }
+        else{
+            orginalText += modTextArray[i] + " ";
+        }
+    }
+
+
+
+    // for(var i=0; i<modTextArray.length; i++){
+    //     if(modTextArray[i][0] != " " && modTextArray[i].length > 0){
+    //         if(modTextArray[i][0] === "#" && modTextArray[i][1] === "@"){
+    //             var index = getIndexID(modTextArray[i].substring(2, modTextArray[i].length));
+    //             if(index != -1){
+    //                 orginalText += data[index].value + " ";
+    //             }
+    //         }
+    //         else{
+    //             orginalText += modTextArray[i] + " ";
+    //         }
+    //     }
+    // }
     document.getElementById('output-text-2').innerHTML = orginalText;
 }
