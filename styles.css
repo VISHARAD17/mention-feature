@@ -2,10 +2,6 @@ body {
     position: relative;
 }
 
-p-class {
-    visibility: hidden;
-}
-
 .tribute-demo-input {
     outline: none;
     border: 1px solid #eee;
@@ -44,12 +40,16 @@ p-class {
 
 .input-area {
     height: 90px;
+    width: 70%;
     font-weight: 80%;
     margin-top: 10px;
     border: none;
     border-radius: 5px;
     background-color: rgb(220, 223, 223);
     padding: 15px;
+    margin-left: auto;
+    margin-top: 10px;
+    margin-right: auto;
 }
 
 .input-area:focus {
@@ -57,13 +57,17 @@ p-class {
 }
 
 .output-area {
-    height: 50px;
+    height: 90px;
+    width: 70%;
     font-weight: 80%;
     margin-top: 10px;
     border: none;
     border-radius: 5px;
     background-color: rgb(220, 223, 223);
     padding: 15px;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .btn-div {
@@ -74,4 +78,5 @@ p-class {
     background-color: rgb(158, 158, 230);
     border: none;
     border-radius: 7px;
+    padding: 10px;
 }

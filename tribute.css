@@ -9,6 +9,7 @@
 }
 .tribute-container ul {
   margin: 0;
+  border-radius: 7px;
   margin-top: 2px;
   padding: 0;
   list-style: none;
@@ -16,6 +17,7 @@
 }
 .tribute-container li {
   padding: 5px 5px;
+  border-radius: 7px;
   cursor: pointer;
 }
 .tribute-container li.highlight {
