@@ -17,7 +17,13 @@ var data = [
         value: "chinmay",
         email: "chinmay@gmail.com",
         id:'3'
-    }
+    },
+    {
+        key: "visharad borsutkar",
+        value: "visharad borsutkar",
+        email: "visharadihihh@gmail.com",
+        id:'4'
+    },
 ];
 
 // ------- name and id data from the main dummy data
@@ -33,19 +39,19 @@ selectTemplate: function(item) {
     if (this.range.isContentEditable(this.current.element)) {
 
     return (
-        '<span contenteditable="false"><a href="http://google.com" target="_blank" title="' +
+        '<span contenteditable="false">&nbsp<a href="http://google.com" target="_blank" title="' +
         item.original.email +
         '">' +
         item.original.value +
-        "</a></span>"
+        "</a>&nbsp</span>"
         // '<a href="' + item.original.email +'">' + item.original.value+'</a>'
         // '@' + item.original.value
     );
     }
     return "@" + item.original.value;
 },
-requireLeadingSpace: true,
-allowSpaces: true,
+requireLeadingSpace: false,
+allowSpaces: true
 });
 tribute.attach(document.getElementById("test"));
 tribute.attach(document.getElementById("testInput"));
@@ -81,7 +87,7 @@ function myFunction() {
     for(i=0; i<wordArray.length; i++){
         var index = getIndex(wordArray[i]);
         if(index != -1){
-            modText += "#@" + data[index].id + " ";
+            modText += "#@" + data[index].id;
         }
         else{
             modText += wordArray[i] + " ";
