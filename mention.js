@@ -91,10 +91,10 @@ function myFunction() {
             var word = wordArray[i];
             word = word.slice(1);  //removes first @ char
             console.log(word);
-            index = getIndex(word);
+            index = getIndex(word); //index of the mention in data
             console.log(index);
             if(index != -1)text += "#@"+ data[index].id + " ";
-            else{
+            else{ // if index not there means its not an mention
                 text += "@" + word + " ";
             }
         }
